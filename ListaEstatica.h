@@ -16,18 +16,6 @@ struct ListaE {
 	int tamanho;
 };
 
-template <typename T,int MAX>
-ostream& operator<<(ostream& os, const ListaE<T, MAX> &list) {
-    if(list.len == 0) {
-        os << "Lista vazia" << endl;
-    } else {
-        for(int i = 0; i < list.tamanho; i++) {
-            os << "Lista[" << i << "]: " << list.dado.nome << "" << list.dado.pontuacao << endl;
-        }
-    }
-    return os;
-}
-
 template<typename T, int MAX>
 void inicializarE(ListaE<T, MAX>& lista) {
 	lista.tamanho = 0;
@@ -36,7 +24,7 @@ void inicializarE(ListaE<T, MAX>& lista) {
 template<typename T, int MAX>//Juntei tudo as função pra ser um só inserir
 void inserirE(ListaE<T, MAX>& lista, T dado, int pos){
     if(pos > lista.tamanho || pos < 0){
-        throw "Posição inválida";
+        throw "Erro de Indice";
     }
     else if(lista.tamanho == pos){
         lista.elementos[lista.tamanho].dado = dado;
@@ -145,7 +133,7 @@ T obter_posicaoE(ListaE<T, MAX>& lista, T dado) {
 template<typename T, int MAX>
 void imprimirE(ListaE<T, MAX>& lista) {
 	for (int i = 0; i < lista.tamanho; i++) {
-		cout << " " << lista.elementos << endl;
+		cout << " " << lista.elementos.nome << " " << lista.elementos.pontuacao << endl;
 	}
 }
 
