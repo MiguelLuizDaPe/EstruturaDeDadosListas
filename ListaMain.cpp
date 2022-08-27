@@ -21,7 +21,5 @@ int main()
             std::cout << x << std::endl;
         }
     }
-    std::cout << l << std::endl;
-    std::cout << l << std::endl;
-    
+    l.print();
 }
