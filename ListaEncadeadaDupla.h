@@ -28,19 +28,19 @@ namespace Lista2 {
 		Node<T> *head;
 		Node<T> *tail;
 		void insert(int pos, T data) {
+			Node<T> *el = new Node<T>;
+			el->data = data;
 			if (pos == 0) {
 				if (this->head == nullptr) { // quando for lista vazia
-					Node<T> *el = new Node<T>;
-					el->data = data;
-					el->next = this->head;
-					el->prev = this->tail;
+					el->next = this->tail;
+					el->prev = this->head;
 					this->head = el;
 					this->tail = el;
 				}
 				else {
-					Node<T> *el = new Node<T>;
-					el->data = data;
 					el->next = this->head;
+					this->head->prev = el;
+					el->prev = nullptr;
 					this->head = el;
 				}
 			}
@@ -50,12 +50,10 @@ namespace Lista2 {
 				int counter = 0;
 				while (nav->next != nullptr && counter < pos) {
 					prev_nav = nav;                         //vai pra posição atual do nav
-					nav = nav->next;                        //vai nav um pra frente
+					nav = nav->next;     					//vai nav um pra frente
 					counter++;
 				}
 				if (counter == pos) {
-					Node<T> *el = new Node<T>;
-					el->data = data;
 					el->next = nav;
 					prev_nav->next = el;
 					el->prev = prev_nav;
@@ -64,12 +62,9 @@ namespace Lista2 {
 				else if (counter + 1 == pos) {
 					prev_nav = nav;
 					nav = nav->next;
-					Node<T> *el = new Node<T>;
-					el->data = data;
 					el->next = nav;
 					prev_nav->next = el;
 					el->prev = prev_nav;
-					nav->prev = el;
 					this->tail = el;
 				}
 				else {
@@ -89,6 +84,7 @@ namespace Lista2 {
 				else {
 					Node<T> *del = this->head;
 					this->head = del->next;
+					del->next->prev = nullptr;
 					delete del;
 				}
 			}
@@ -192,10 +188,9 @@ namespace Lista2 {
 	std::ostream& operator<<(std::ostream& os, const Lista2::List<T> &list) {
 		if (list.head == nullptr) {
 			os << "Lista vazia" << std::endl;
-		}
-		else {
+		}else {
 			auto nav = list.head;
-			while (nav->next != nullptr) {
+			while (nav->next != nullptr){
 				os << nav->data.nome << " " << nav->data.pontuacao << " ";
 				nav = nav->next;
 			}
