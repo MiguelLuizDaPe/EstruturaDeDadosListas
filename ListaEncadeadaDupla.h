@@ -176,6 +176,19 @@ namespace Lista2 {
 			}
 			return n + 1;
 		}
+		void print(){
+            if(this->head == nullptr) {
+                std::cout << "Lista vazia" << std::endl;
+            }else {
+                auto nav = this->head;
+                while(nav->next != nullptr){
+                    std::cout << nav->data.nome << " " << nav->data.pontuacao << " ";
+                    nav = nav->next;
+                }
+            std::cout << nav->data.nome << " " << nav->data.pontuacao;
+            std::cout << std::endl;
+            }
+        }
 
 		List() {
 			this->head = nullptr;
@@ -183,23 +196,6 @@ namespace Lista2 {
 		}
 
 	};
-
-	template <class T>
-	std::ostream& operator<<(std::ostream& os, const Lista2::List<T> &list) {
-		if (list.head == nullptr) {
-			os << "Lista vazia" << std::endl;
-		}else {
-			auto nav = list.head;
-			while (nav->next != nullptr){
-				os << nav->data.nome << " " << nav->data.pontuacao << " ";
-				nav = nav->next;
-			}
-			os << nav->data.nome << " " << nav->data.pontuacao;
-			os << std::endl;
-		}
-		return os;
-	}
-
 }
 
 #endif
