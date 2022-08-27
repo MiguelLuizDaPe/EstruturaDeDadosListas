@@ -1,8 +1,8 @@
 #include <iostream>
 #include "listaEstatica.h"
 // #include "structs.h"
-#include "ViadagemDoMarcos.h"
 #include "DuplaViadagem.h"
+#include "ViadagemDoMarcos.h"
 #include "ranking.h"
 
 
@@ -17,10 +17,11 @@ int main()
         try{
             l.insert(i, criar_jogador());
         }
-        catch(char *x){
+        catch(char const* x){
             std::cout << x << std::endl;
         }
     }
+    std::cout << l << std::endl;
     std::cout << l << std::endl;
     
 }
