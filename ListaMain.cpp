@@ -1,9 +1,9 @@
 #include <iostream>
-#include "listaEstatica.h"
+#include "ListaEstatica.h"
 // #include "structs.h"
-#include "DuplaViadagem.h"
-#include "ViadagemDoMarcos.h"
-#include "ranking.h"
+#include "ListaEncadeadaDupla.h"
+#include "ListaEncadeada.h"
+#include "Ranking.h"
 
 
 int main()

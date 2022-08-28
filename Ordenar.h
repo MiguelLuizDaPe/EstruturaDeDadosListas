@@ -4,8 +4,8 @@
 #include <iostream>
 #include "Ranking.h"
 #include "ListaEstatica.h"
-#include "EncadeadaDupla.h"
-#include "EncadeadaSimples.h"
+#include "ListaEncadeadaDupla.h"
+#include "ListaEncadeada.h"
 
 template<typename T, int MAX>
 void bubble_sort_estatica(ListaE<Jogador, MAX>& l) {
