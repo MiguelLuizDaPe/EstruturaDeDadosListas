@@ -141,11 +141,10 @@ namespace Lista {
             }else {
                 auto nav = this->head;
                 while(nav->next != nullptr){
-                    std::cout << nav->data.nome << " " << nav->data.pontuacao << " ";
+                    std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
                     nav = nav->next;
                 }
-            std::cout << nav->data.nome << " " << nav->data.pontuacao;
-            std::cout << std::endl;
+            std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
             }
         }
 

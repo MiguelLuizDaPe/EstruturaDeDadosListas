@@ -1,17 +1,19 @@
 #include <iostream>
 #include "ListaEstatica.h"
-// #include "structs.h"
+#include "Ordenar.h"
 #include "ListaEncadeadaDupla.h"
 #include "ListaEncadeada.h"
 #include "Ranking.h"
-
+#define MAX_JOGADORES 200
 
 int main()
 {
     srand(time(NULL));
-    int num_de_jogadores = rand() % 51;
+    int num_de_jogadores = rand() % MAX_JOGADORES;
 
-    Lista2::List<Jogador> l;
+    // Lista::List<Jogador> l;
+    ListaE<Jogador, 20000> l;
+
 
     for (int i = 0; i < num_de_jogadores; i++) {
         try{
@@ -21,5 +23,6 @@ int main()
             std::cout << x << std::endl;
         }
     }
+    bubble_sort<Jogador, 20000>(l);
     l.print();
 }

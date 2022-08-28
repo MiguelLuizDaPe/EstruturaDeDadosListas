@@ -8,7 +8,7 @@
 #include "ListaEncadeada.h"
 
 template<typename T, int MAX>
-void bubble_sort_estatica(ListaE<Jogador, MAX>& l) {
+void bubble_sort(ListaE<Jogador, MAX>& l) {
     int i, j;
     Jogador temp;
     for (i = 0; i < l.tamanho; i++) {
@@ -23,7 +23,7 @@ void bubble_sort_estatica(ListaE<Jogador, MAX>& l) {
     }
 }
 
-void bubble_sort_encadeada_simples(Lista::List<Jogador>& l) {
+void bubble_sort(Lista::List<Jogador>& l) {
     int i, j;
     Jogador temp;
     for (i = 0; i < l.size(); i++) {
@@ -38,7 +38,7 @@ void bubble_sort_encadeada_simples(Lista::List<Jogador>& l) {
     }
 }
 
-void bubble_sort_encadeada_dupla(Lista2::List<Jogador>& l) {
+void bubble_sort(Lista2::List<Jogador>& l) {
     int i, j;
     Jogador temp;
     for (i = 0; i < l.size(); i++) {
