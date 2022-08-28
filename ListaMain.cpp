@@ -4,6 +4,14 @@
 #include "Ranking.h"
 #define MAX_JOGADORES 200
 
+#ifdef _WIN32
+#define PAUSE(msg) system("pause")
+#define CLEAR() system("cls")
+#else
+#define PAUSE(msg) system("echo " msg " ; read _")
+#define CLEAR() system("clear")
+#endif
+
 enum TipoLista{ ENCS, ENCD };
 
 int main()
@@ -43,15 +51,19 @@ int main()
                 std::cout << x << std::endl;
             }
         }
-        bubble_sort(l);
-        l.print();
-        std::cout << "--------------------" << std::endl;
-        try{
-            Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
-            listaTop.print();    
-        }
-        catch(const char *x){
-            std::cout << x << std::endl;
+        for(int i = 0; i < 5; i++){
+            bubble_sort(l);
+            l.print();
+            std::cout << "--------------------" << std::endl;
+            try{
+                Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
+                listaTop.print();    
+            }
+            catch(const char *x){
+                std::cout << x << std::endl;
+            }
+            Round(l);
+            PAUSE("Pressione qualquer tecla para continuar...");
         }
         
     }
@@ -67,17 +79,19 @@ int main()
                 std::cout << x << std::endl;
             }
         }
-        bubble_sort(l);
-        l.print();
-        std::cout << "--------------------" << std::endl;
-        try{
-            Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
-            listaTop.print();    
-        }
-        catch(const char *x){
-            std::cout << x << std::endl;
+        for(int i = 0; i < 5; i++){
+            bubble_sort(l);
+            l.print();
+            std::cout << "--------------------" << std::endl;
+            try{
+                Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
+                listaTop.print();    
+            }
+            catch(const char *x){
+                std::cout << x << std::endl;
+            }
+            Round(l);
+            PAUSE("Pressione qualquer tecla para continuar...");
         }
     }
-
-
 }

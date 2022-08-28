@@ -30,12 +30,12 @@ Lista::Estatica<Jogador, 10> OsTop(Lista::Encadeada<Jogador> ListEncSimp, int po
     Lista::Estatica<Jogador, 10> ListEst;
     Lista::Node<Jogador> *nav = ListEncSimp.head;
     if(nav == nullptr){
-        throw "Lista vazia";
+        throw "Lista vazia(ostop encadeada simples)";
     }
 	int counter = 0;
 	while(nav->next != nullptr && counter < pos){
         ListEst[counter] = ListEncSimp[counter];
-        ListEst.tamanho++; 
+        ListEst.tamanho++;
 		nav = nav->next;
 		counter++;
 	}
@@ -46,7 +46,7 @@ Lista::Estatica<Jogador, 10> OsTop(Lista::Encadeada2<Jogador> ListEncDup, int po
     Lista::Estatica<Jogador, 10> ListEst;
     Lista::Node2<Jogador> *nav = ListEncDup.head;
     if(nav == nullptr){
-        throw "Lista vazia";
+        throw "Lista vazia(ostop encadeada dupla)";
     }
 	int counter = 0;
 	while(nav->next != nullptr && counter < pos){
@@ -58,7 +58,54 @@ Lista::Estatica<Jogador, 10> OsTop(Lista::Encadeada2<Jogador> ListEncDup, int po
     return ListEst;
 }
 
+void Round(Lista::Encadeada<Jogador> &l){
+	Lista::Node<Jogador> *nav = l.head;
+    if(nav == nullptr){
+        throw "Lista vazia(rounds encadeada simples)";
+    }
+    int pontAle = 0;
+    int counter = 0;
+    int pos = 10; // pq vai variar entre os 10 primeiros
+    while(nav->next != nullptr && counter < pos){
+        pontAle = (rand() % 101) + 100; //pra gerar um numero entre 100 e 200
+        l[counter].pontuacao += pontAle;
+        nav = nav->next;
+        counter++;
+    }
+    pos = l.size(); // pra variar no resto
+    while(nav->next != nullptr && counter < pos){
+        pontAle = (rand() % 501) + 500; //pra gerar um numero entre 500 e 1000
+        l[counter].pontuacao += pontAle;
+        nav = nav->next;
+        counter++;
+    }
+    pontAle = (rand() % 501) + 500; //pra gerar um numero entre 500 e 1000
+    l[counter].pontuacao += pontAle;
+}
 
-
+void Round(Lista::Encadeada2<Jogador> &l){
+	Lista::Node2<Jogador> *nav = l.head;
+    if(nav == nullptr){
+        throw "Lista vazia(rounds encadeada dupla)";
+    }
+    int pontAle = 0;
+    int counter = 0;
+    int pos = 10; // pq vai variar entre os 10 primeiros
+    while(nav->next != nullptr && counter < pos){
+        pontAle = (rand() % 101) + 100; //pra gerar um numero entre 100 e 200
+        l[counter].pontuacao += pontAle;
+        nav = nav->next;
+        counter++;
+    }
+    pos = l.size(); // pra variar no resto
+    while(nav->next != nullptr && counter < pos){
+        pontAle = (rand() % 501) + 500; //pra gerar um numero entre 500 e 1000
+        l[counter].pontuacao += pontAle;
+        nav = nav->next;
+        counter++;
+    }
+    pontAle = (rand() % 501) + 500;
+    l[counter].pontuacao += pontAle;
+}
 
 #endif

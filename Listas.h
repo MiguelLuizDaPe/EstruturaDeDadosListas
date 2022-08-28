@@ -12,7 +12,7 @@ struct Estatica {
 	int tamanho;
 	void insert(int pos, T dado){
 		if(pos > this->tamanho || pos < 0){
-			throw "Erro de Indice";
+			throw "Erro de Indice(insert estatica)";
 		}
 		else if(this->tamanho == pos){
 			this->elementos[this->tamanho] = dado;
@@ -29,7 +29,7 @@ struct Estatica {
 
 	void remove(int pos){
 		if(pos > this->tamanho || pos < 0){
-			throw "Posição inválida";
+			throw "Erro de Indice(remove estatica)";
 		}
 		else if(pos == this->tamanho){
 			this->tamanho--;
@@ -44,7 +44,7 @@ struct Estatica {
 
 	T& at(int pos) {
 		if(pos > this->tamanho || pos < 0){
-			throw "Posição inválida";
+			throw "Erro de Indice(at estatica)";
 		}
 		else{
 			return this->elementos[pos];
@@ -78,9 +78,12 @@ struct Estatica {
 	}
 
 	void print(int pos = 0) {
+		if(tamanho == 0){
+			throw "Lista vazia(estatica)";
+		}
 		if(pos == 0){
 			for (int i = 0; i < this->tamanho; i++) {
-				std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
+				std::cout << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
 			}
 		}
 		else{
@@ -131,7 +134,7 @@ struct Encadeada {
 				prev_nav->next = el;
 			}
 			else{
-				throw "Erro de indice";
+				throw "Erro de indice(insert escadeada simples)";
 			}
 		}
 
@@ -157,7 +160,7 @@ struct Encadeada {
 				delete del;
 			}
 			else{
-				throw "Erro de indice";
+				throw "Erro de indice(remove encadeada simples)";
 			}
 		}
 	}
@@ -172,7 +175,7 @@ struct Encadeada {
 			return nav->data;
 		}
 		else{
-			throw "Erro de indice";
+			throw "Erro de indice(at encadeada simples)";
 		}
 	}
 	T& operator[](int pos){
@@ -221,7 +224,7 @@ struct Encadeada {
 	}
 	void print(int pos = 0){
 		if(this->head == nullptr) {
-			std::cout << "Lista vazia" << std::endl;
+			std::cout << "Lista vazia(encadeada simples)" << std::endl;
 		}
 		else if(pos == 0){
 			auto nav = this->head;
@@ -284,7 +287,7 @@ struct Encadeada2 {
 				prev_nav->next = el;
 			}
 			else{
-				throw "Erro de indice";
+				throw "Erro de indice(insert encadeada dupla)";
 			}
 		}
 
@@ -310,7 +313,7 @@ struct Encadeada2 {
 				delete del;
 			}
 			else{
-				throw "Erro de indice";
+				throw "Erro de indice(remove encadeada dupla)";
 			}
 		}
 	}
@@ -325,7 +328,7 @@ struct Encadeada2 {
 			return nav->data;
 		}
 		else{
-			throw "Erro de indice";
+			throw "Erro de indice(at encadeada dupla)";
 		}
 	}
 	T& operator[](int pos){
@@ -374,7 +377,7 @@ struct Encadeada2 {
 	}
 	void print(int pos = 0){
 		if(this->head == nullptr) {
-			std::cout << "Lista vazia" << std::endl;
+			std::cout << "Lista vazia(encadeada dupla)" << std::endl;
 		}
 		else if(pos == 0){
 			auto nav = this->head;
