@@ -77,10 +77,18 @@ struct Estatica {
 		this->tamanho = 0;
 	}
 
-	void print() {
-		for (int i = 0; i < this->tamanho; i++) {
-			std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
+	void print(int pos = 0) {
+		if(pos == 0){
+			for (int i = 0; i < this->tamanho; i++) {
+				std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
+			}
 		}
+		else{
+			for (int i = 0; i < pos; i++) {
+				std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
+			}
+		}
+		
 	}
 };
 
@@ -211,16 +219,26 @@ struct Encadeada {
 		}
 		return n + 1;
 	}
-	void print(){
+	void print(int pos = 0){
 		if(this->head == nullptr) {
 			std::cout << "Lista vazia" << std::endl;
-		}else {
+		}
+		else if(pos == 0){
 			auto nav = this->head;
 			while(nav->next != nullptr){
 				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 				nav = nav->next;
 			}
-		std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
+			std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;//pois ele n imprime o ultimo no loop
+		}
+		else{
+			auto nav = this->head;
+			int counter = 0;
+			while(nav->next != nullptr && counter < pos){
+				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
+				nav = nav->next;
+				counter++;
+			}
 		}
 	}
 
@@ -354,16 +372,26 @@ struct Encadeada2 {
 		}
 		return n + 1;
 	}
-	void print(){
+	void print(int pos = 0){
 		if(this->head == nullptr) {
 			std::cout << "Lista vazia" << std::endl;
-		}else {
+		}
+		else if(pos == 0){
 			auto nav = this->head;
 			while(nav->next != nullptr){
 				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 				nav = nav->next;
 			}
-		std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
+			std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;//pois ele n imprime o ultimo no loop
+		}
+		else{
+			auto nav = this->head;
+			int counter = 0;
+			while(nav->next != nullptr && counter < pos){
+				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
+				nav = nav->next;
+				counter++;
+			}
 		}
 	}
 

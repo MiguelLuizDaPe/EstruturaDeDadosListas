@@ -4,30 +4,34 @@
 #include "Ranking.h"
 #define MAX_JOGADORES 200
 
-enum TipoLista{ EST, ENCS, ENCD};
+enum TipoLista{ ENCS, ENCD };
 
-int main() //criar um gerador de listas
+int main()
 {
     srand(time(NULL));
 
-    TipoLista tl = EST;
+    TipoLista tipo_lista = ENCD;//variavel que funciona como menu
+    int top = 5;                //variavel que funciona como o top N
 
-    if(tl == EST){
-        Lista::Estatica<Jogador, 20000> l;
-        int num_de_jogadores = rand() % MAX_JOGADORES;
+    // if(tipo_lista == EST){
+    //     Lista::Estatica<Jogador, 20000> l;
+    //     int num_de_jogadores = rand() % MAX_JOGADORES;
 
-        for (int i = 0; i < num_de_jogadores; i++) {
-            try{
-                l.insert(i, criar_jogador());
-            }
-            catch(char const* x){
-                std::cout << x << std::endl;
-            }
-        }
-        bubble_sort<Jogador, 20000>(l);
-        l.print();
-    }
-    if(tl == ENCS){
+    //     for (int i = 0; i < num_de_jogadores; i++) {
+    //         try{
+    //             l.insert(i, criar_jogador());
+    //         }
+    //         catch(char const* x){
+    //             std::cout << x << std::endl;
+    //         }
+    //     }
+    //     bubble_sort<Jogador, 20000>(l);
+    //     l.print();
+    //     std::cout << "--------------------" << std::endl;
+    //     l.print(top);
+
+    // }
+    if(tipo_lista == ENCS){
         Lista::Encadeada<Jogador> l;
         int num_de_jogadores = rand() % MAX_JOGADORES;
 
@@ -41,8 +45,17 @@ int main() //criar um gerador de listas
         }
         bubble_sort(l);
         l.print();
+        std::cout << "--------------------" << std::endl;
+        try{
+            Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
+            listaTop.print();    
+        }
+        catch(const char *x){
+            std::cout << x << std::endl;
+        }
+        
     }
-    if(tl == ENCD){
+    if(tipo_lista == ENCD){
         Lista::Encadeada2<Jogador> l;
         int num_de_jogadores = rand() % MAX_JOGADORES;
 
@@ -56,8 +69,15 @@ int main() //criar um gerador de listas
         }
         bubble_sort(l);
         l.print();
+        std::cout << "--------------------" << std::endl;
+        try{
+            Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
+            listaTop.print();    
+        }
+        catch(const char *x){
+            std::cout << x << std::endl;
+        }
     }
 
-    // Lista::List<Jogador> l;
-    
+
 }

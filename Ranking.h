@@ -2,6 +2,7 @@
 #define RANKING
 
 #include <iostream>
+#include "Listas.h"
 
 struct Jogador {
     std::string nome;
@@ -24,6 +25,39 @@ Jogador criar_jogador() {
     jogador.pontuacao = rand() % 10001;
     return jogador;
 }
+
+Lista::Estatica<Jogador, 10> OsTop(Lista::Encadeada<Jogador> ListEncSimp, int pos){
+    Lista::Estatica<Jogador, 10> ListEst;
+    Lista::Node<Jogador> *nav = ListEncSimp.head;
+    if(nav == nullptr){
+        throw "Lista vazia";
+    }
+	int counter = 0;
+	while(nav->next != nullptr && counter < pos){
+        ListEst[counter] = ListEncSimp[counter];
+        ListEst.tamanho++; 
+		nav = nav->next;
+		counter++;
+	}
+    return ListEst;
+}
+
+Lista::Estatica<Jogador, 10> OsTop(Lista::Encadeada2<Jogador> ListEncDup, int pos){
+    Lista::Estatica<Jogador, 10> ListEst;
+    Lista::Node2<Jogador> *nav = ListEncDup.head;
+    if(nav == nullptr){
+        throw "Lista vazia";
+    }
+	int counter = 0;
+	while(nav->next != nullptr && counter < pos){
+        ListEst[counter] = ListEncDup[counter];
+        ListEst.tamanho++; 
+		nav = nav->next;
+		counter++;
+	}
+    return ListEst;
+}
+
 
 
 
