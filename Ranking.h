@@ -7,6 +7,12 @@
 struct Jogador {
     std::string nome;
     int pontuacao;
+    bool operator==(const Jogador &rhs){
+        return (this->nome == rhs.nome && this->pontuacao == rhs.pontuacao);
+    }
+    bool operator!=(const Jogador &rhs){
+        return !(this->nome == rhs.nome && this->pontuacao == rhs.pontuacao);
+    }
 };
 
 Jogador criar_jogador() {

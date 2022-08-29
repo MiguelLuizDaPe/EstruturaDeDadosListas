@@ -12,7 +12,7 @@ struct Estatica {
 	int tamanho;
 	void insert(int pos, T dado){
 		if(pos > this->tamanho || pos < 0){
-			throw "Erro de Indice(insert estatica)";
+			throw "Erro de Indice";
 		}
 		else if(this->tamanho == pos){
 			this->elementos[this->tamanho] = dado;
@@ -29,7 +29,7 @@ struct Estatica {
 
 	void remove(int pos){
 		if(pos > this->tamanho || pos < 0){
-			throw "Erro de Indice(remove estatica)";
+			throw "Posição inválida";
 		}
 		else if(pos == this->tamanho){
 			this->tamanho--;
@@ -44,7 +44,7 @@ struct Estatica {
 
 	T& at(int pos) {
 		if(pos > this->tamanho || pos < 0){
-			throw "Erro de Indice(at estatica)";
+			throw "Posição inválida";
 		}
 		else{
 			return this->elementos[pos];
@@ -77,21 +77,10 @@ struct Estatica {
 		this->tamanho = 0;
 	}
 
-	void print(int pos = 0) {
-		if(tamanho == 0){
-			throw "Lista vazia(estatica)";
+	void print() {
+		for (int i = 0; i < this->tamanho; i++) {
+			std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
 		}
-		if(pos == 0){
-			for (int i = 0; i < this->tamanho; i++) {
-				std::cout << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
-			}
-		}
-		else{
-			for (int i = 0; i < pos; i++) {
-				std::cout << " " << this->elementos[i].nome << " " << this->elementos[i].pontuacao << std::endl;
-			}
-		}
-		
 	}
 };
 
@@ -134,7 +123,7 @@ struct Encadeada {
 				prev_nav->next = el;
 			}
 			else{
-				throw "Erro de indice(insert escadeada simples)";
+				throw "Erro de indice";
 			}
 		}
 
@@ -160,7 +149,7 @@ struct Encadeada {
 				delete del;
 			}
 			else{
-				throw "Erro de indice(remove encadeada simples)";
+				throw "Erro de indice";
 			}
 		}
 	}
@@ -175,7 +164,7 @@ struct Encadeada {
 			return nav->data;
 		}
 		else{
-			throw "Erro de indice(at encadeada simples)";
+			throw "Erro de indice";
 		}
 	}
 	T& operator[](int pos){
@@ -222,184 +211,208 @@ struct Encadeada {
 		}
 		return n + 1;
 	}
-	void print(int pos = 0){
+	void print(){
 		if(this->head == nullptr) {
-			std::cout << "Lista vazia(encadeada simples)" << std::endl;
-		}
-		else if(pos == 0){
+			std::cout << "Lista vazia" << std::endl;
+		}else {
 			auto nav = this->head;
 			while(nav->next != nullptr){
 				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 				nav = nav->next;
 			}
-			std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;//pois ele n imprime o ultimo no loop
-		}
-		else{
-			auto nav = this->head;
-			int counter = 0;
-			while(nav->next != nullptr && counter < pos){
-				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
-				nav = nav->next;
-				counter++;
-			}
+		std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 		}
 	}
 
 	Encadeada(){ this->head = nullptr; }
 };
 // Encadeada Dupla
-
 template<class T>
 struct Node2 {
 	T data;
 	Node2<T> *next;
+	Node2<T> *prev;
 
-	Node2(){ this->next = nullptr; }
+	Node2() {
+		this->next = nullptr;
+		this->prev = nullptr;
+	}
+
 };
 
 template<class T>
-struct Encadeada2 {
+struct Encadeada2{
 	Node2<T> *head;
-	void insert(int pos, T data){
+	Node2<T> *tail;
+	void insert(int pos, T data) {
 		Node2<T> *el = new Node2<T>;
 		el->data = data;
-		if(pos == 0){
-			el->next = this->head;
-			this->head = el;
+		if (pos == 0) {
+			if (this->head == nullptr) { // quando for lista vazia
+				el->next = this->tail;
+				el->prev = this->head;
+				this->head = el;
+				this->tail = el;
+			}
+			else {
+				el->next = this->head;
+				this->head->prev = el;
+				el->prev = nullptr;
+				this->head = el;
+			}
 		}
-		else{
+		else {
 			Node2<T> *nav = this->head;
 			Node2<T> *prev_nav = this->head;
 			int counter = 0;
-			while(nav->next != nullptr && counter < pos){
+			while (nav->next != nullptr && counter < pos) {
 				prev_nav = nav;  //vai pra posição atual do nav
 				nav = nav->next; //vai nav um pra frente
 				counter++;
 			}
-			if(counter == pos){
+			if (counter == pos) {
 				el->next = nav;
 				prev_nav->next = el;
+				el->prev = prev_nav;
+				nav->prev = el;
 			}
-			else if(counter + 1 == pos){
+			else if (counter + 1 == pos) {
 				prev_nav = nav;
 				nav = nav->next;
 				el->next = nav;
 				prev_nav->next = el;
+				el->prev = prev_nav;
+				this->tail = el;
 			}
-			else{
-				throw "Erro de indice(insert encadeada dupla)";
+			else {
+				throw "Erro de indice";
 			}
 		}
 
 	} // melhor: insert(int pos, const T& data)
-	void remove(int pos){
-		if(pos == 0){
-			Node2<T> *del = head;
-			head = del->next;
-			delete del;
-		}
-		else{
-			Node2<T> *nav = this->head;
-			Node2<T> *prev_nav = this->head;
-			int counter = 0;
-			while(nav->next != nullptr && counter < pos){
-				prev_nav = nav;
-				nav = nav->next;
-				counter++;
-			}
-			if(counter == pos){
-				Node2<T> *del = nav;
-				prev_nav->next = nav->next;
+	void remove(int pos) {
+		if (pos == 0) {
+			if (this->head->next == nullptr) { // quando for uma lista com um elemento
+				Node2<T> *del = head;
+				this->head = nullptr;
+				this->tail = nullptr;
 				delete del;
 			}
-			else{
-				throw "Erro de indice(remove encadeada dupla)";
+			else {
+				Node2<T> *del = this->head;
+				this->head = del->next;
+				del->next->prev = nullptr;
+				delete del;
+			}
+		}
+		else {
+			Node2<T> *nav = this->head;
+			Node2<T> *prev_nav = this->head;
+			Node2<T> *next_nav = this->head->next;
+			int counter = 0;
+			while (nav->next != nullptr && counter < pos) {
+				prev_nav = nav;
+				nav = next_nav;
+				next_nav = next_nav->next;
+				counter++;
+			}
+			if (counter == pos) {
+				if (next_nav == nullptr) {
+					Node2<T> *del = nav;
+					prev_nav->next = nullptr;
+					this->tail = prev_nav;
+					delete del;
+				}
+				else {
+					Node2<T> *del = nav;
+					prev_nav->next = next_nav;
+					next_nav->prev = prev_nav;
+					delete del;
+				}
+			}
+			else {
+				throw "Erro de indice";
 			}
 		}
 	}
-	T& at(int pos){
+	T& at(int pos) {
 		Node2<T> *nav = this->head;
 		int counter = 0;
-		while(nav->next != nullptr && counter < pos){
+		while (nav->next != nullptr && counter < pos) {
 			nav = nav->next;
 			counter++;
 		}
-		if(counter == pos){
+		if (counter == pos) {
 			return nav->data;
 		}
-		else{
-			throw "Erro de indice(at encadeada dupla)";
+		else {
+			throw "Erro de indice";
 		}
 	}
-	T& operator[](int pos){
+	T& operator[](int pos) {
 		return this->at(pos);
 	}
-	bool contains(T data){
+	bool contains(T data) {
 		Node2<T> *nav = this->head;
-		while(nav->next != nullptr){
-			if(nav->data == data){
+		while (nav->next != nullptr) {
+			if (nav->data == data) {
 				return true;
 			}
 			nav = nav->next;
 		}
 		return nav->data == data;
 	}
-	int find(T data){
+	int find(T data) {
 		Node2<T> *nav = this->head;
 		int counter = 0;
-		while(nav->next != nullptr){
-			if(nav->data == data){
+		while (nav->next != nullptr) {
+			if (nav->data == data) {
 				break;
 			}
 			nav = nav->next;
 			counter++;
 		}
-		if(nav->data == data){
+		if (nav->data == data) {
 			return counter;
 		}
-		else{
+		else {
 			return -1;
 		}
 		// se nao tiver o elemento :
 		// return not_found;
 	}
-	int size(){
-		auto nav = this->head;
+	int size() {
+		Node2<T> *nav = this->head;
 		int n = 0;
-		if(this->head == nullptr){
+		if (this->head == nullptr) {
 			return 0;
 		}
-		while(nav->next != nullptr){
+		while (nav->next != nullptr) {
 			nav = nav->next;
 			n++;
 		}
 		return n + 1;
 	}
-	void print(int pos = 0){
+	void print(){
 		if(this->head == nullptr) {
-			std::cout << "Lista vazia(encadeada dupla)" << std::endl;
-		}
-		else if(pos == 0){
+			std::cout << "Lista vazia" << std::endl;
+		}else {
 			auto nav = this->head;
 			while(nav->next != nullptr){
 				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 				nav = nav->next;
 			}
-			std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;//pois ele n imprime o ultimo no loop
-		}
-		else{
-			auto nav = this->head;
-			int counter = 0;
-			while(nav->next != nullptr && counter < pos){
-				std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
-				nav = nav->next;
-				counter++;
-			}
+		std::cout << nav->data.nome << " " << nav->data.pontuacao << std::endl;
 		}
 	}
 
-	Encadeada2(){ this->head = nullptr; }
+	Encadeada2() {
+		this->head = nullptr;
+		this->tail = nullptr;
+	}
+
 };
+
 
 } // namespace List
 

@@ -79,7 +79,7 @@ int main()
                 std::cout << x << std::endl;
             }
         }
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < 1; i++){
             bubble_sort(l);
             l.print();
             std::cout << "--------------------" << std::endl;
@@ -93,5 +93,14 @@ int main()
             Round(l);
             PAUSE("Pressione qualquer tecla para continuar...");
         }
+
+        Jogador pedro = l[2];
+        l.find(pedro);
+        l.print();
+        std::cout << " -----------------------------------------------------------------------&&&&" << std::endl;
+        std::cout << pedro.nome << "--------------------------------" << pedro.pontuacao << std::endl;
+        Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
+        listaTop.print();
+
     }
 }
