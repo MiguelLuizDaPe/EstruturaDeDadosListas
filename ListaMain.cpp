@@ -19,7 +19,8 @@ int main()
     srand(time(NULL));
 
     TipoLista tipo_lista = ENCD;//variavel que funciona como menu
-    int top = 5;                //variavel que funciona como o top N
+    int top = 5; 
+    int rodadas = 5;               //variavel que funciona como o top N
 
     // if(tipo_lista == EST){
     //     Lista::Estatica<Jogador, 20000> l;
@@ -41,7 +42,7 @@ int main()
     // }
     if(tipo_lista == ENCS){
         Lista::Encadeada<Jogador> l;
-        int num_de_jogadores = rand() % MAX_JOGADORES;
+        int num_de_jogadores = (rand() % MAX_JOGADORES) + 20;
 
         for (int i = 0; i < num_de_jogadores; i++) {
             try{
@@ -51,7 +52,7 @@ int main()
                 std::cout << x << std::endl;
             }
         }
-        for(int i = 0; i < 5; i++){
+        for(int i = 0; i < rodadas; i++){
             bubble_sort(l);
             l.print();
             std::cout << "--------------------" << std::endl;
@@ -69,7 +70,7 @@ int main()
     }
     if(tipo_lista == ENCD){
         Lista::Encadeada2<Jogador> l;
-        int num_de_jogadores = rand() % MAX_JOGADORES;
+        int num_de_jogadores = (rand() % MAX_JOGADORES) + 20;
 
         for (int i = 0; i < num_de_jogadores; i++) {
             try{
@@ -79,7 +80,7 @@ int main()
                 std::cout << x << std::endl;
             }
         }
-        for(int i = 0; i < 1; i++){
+        for(int i = 0; i < rodadas; i++){
             bubble_sort(l);
             l.print();
             std::cout << "--------------------" << std::endl;
@@ -93,14 +94,6 @@ int main()
             Round(l);
             PAUSE("Pressione qualquer tecla para continuar...");
         }
-
-        Jogador pedro = l[2];
-        l.find(pedro);
-        l.print();
-        std::cout << " -----------------------------------------------------------------------&&&&" << std::endl;
-        std::cout << pedro.nome << "--------------------------------" << pedro.pontuacao << std::endl;
-        Lista::Estatica<Jogador, 10> listaTop = OsTop(l, top);
-        listaTop.print();
 
     }
 }

@@ -7,11 +7,11 @@
 struct Jogador {
     std::string nome;
     int pontuacao;
-    bool operator==(const Jogador &rhs){
-        return (this->nome == rhs.nome && this->pontuacao == rhs.pontuacao);
+    bool operator==(const Jogador &temp){
+        return (this->nome == temp.nome && this->pontuacao == temp.pontuacao);
     }
-    bool operator!=(const Jogador &rhs){
-        return !(this->nome == rhs.nome && this->pontuacao == rhs.pontuacao);
+    bool operator!=(const Jogador &temp){
+        return !(this->nome == temp.nome && this->pontuacao == temp.pontuacao);
     }
 };
 
