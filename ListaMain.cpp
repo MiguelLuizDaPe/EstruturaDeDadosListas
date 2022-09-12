@@ -19,27 +19,9 @@ int main()
     srand(time(NULL));
 
     TipoLista tipo_lista = ENCD;//variavel que funciona como menu
-    int top = 5; 
-    int rodadas = 5;               //variavel que funciona como o top N
+    int top = 5;                //variavel que funciona como o top N
+    int rodadas = 5;               
 
-    // if(tipo_lista == EST){
-    //     Lista::Estatica<Jogador, 20000> l;
-    //     int num_de_jogadores = rand() % MAX_JOGADORES;
-
-    //     for (int i = 0; i < num_de_jogadores; i++) {
-    //         try{
-    //             l.insert(i, criar_jogador());
-    //         }
-    //         catch(char const* x){
-    //             std::cout << x << std::endl;
-    //         }
-    //     }
-    //     bubble_sort<Jogador, 20000>(l);
-    //     l.print();
-    //     std::cout << "--------------------" << std::endl;
-    //     l.print(top);
-
-    // }
     if(tipo_lista == ENCS){
         Lista::Encadeada<Jogador> l;
         int num_de_jogadores = (rand() % MAX_JOGADORES) + 20;
